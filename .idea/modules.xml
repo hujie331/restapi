@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../netmiko/.idea/netmiko.iml" filepath="$PROJECT_DIR$/../netmiko/.idea/netmiko.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../netmiko-pan/.idea/netmiko-pan.iml" filepath="$PROJECT_DIR$/../netmiko-pan/.idea/netmiko-pan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pyez/.idea/pyez.iml" filepath="$PROJECT_DIR$/../pyez/.idea/pyez.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../rest-pan/.idea/rest-pan.iml" filepath="$PROJECT_DIR$/../rest-pan/.idea/rest-pan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/restapi.iml" filepath="$PROJECT_DIR$/.idea/restapi.iml" />
+    </modules>
+  </component>
+</project>
