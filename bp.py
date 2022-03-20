@@ -36,7 +36,7 @@ def print_one_by_one(text):
 def switch_bp(url, sw_name):
     payload = {}
     headers = {
-        'Authorization': 'Basic amh1MTpIVWppZUAyMDIyMDIyNw==',
+        'Authorization': 'Basic cmVzdGFwaV9yOjEyMzQ1Njc4OTBAQXNkZmdoamtsOw==',
         'Accept': 'application/json',
         'Content-Type': 'application/xml'
     }
@@ -104,12 +104,12 @@ def bp():
               6:  dist02.b2f3idf.bp01\n
           Your choice: """)
         if sw_choice == '1' :
-              url = "https://160.33.125.101:3443/rpc/get-configuration"
+              url = "http://160.33.125.101:3000/rpc/get-configuration"
               sw_name = 'dist01.b1f5idf.bp01'
               switch_bp(url, sw_name)
 
         elif sw_choice == '2' :
-              url = "https://160.33.125.102:3443/rpc/get-configuration"
+              url = "http://160.33.125.102:3000/rpc/get-configuration"
               sw_name = 'dist02.b1f5idf.bp01'
               switch_bp(url, sw_name)
 
@@ -118,11 +118,3 @@ def bp():
 
         else:
           invalid_choice()
-
-
-
-
-
-
-
-

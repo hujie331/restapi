@@ -10,5 +10,6 @@
     <orderEntry type="module" module-name="rest-pan" />
     <orderEntry type="module" module-name="netmiko-pan" />
     <orderEntry type="module" module-name="pyez" />
+    <orderEntry type="module" module-name="restapi_f5_private" />
   </component>
 </module>

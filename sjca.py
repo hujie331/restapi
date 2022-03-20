@@ -2,19 +2,12 @@ import requests
 import json
 import pprint
 import os
-#import urllib3
-# import warnings
-# import contextlib
-# import ssl
-# import urllib.request
+
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-# from requests.packages.urllib3.exceptions import InsecureRequestWarning
-# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 import sys,time
-# from urllib3.exceptions import MaxRetryError
-# from urllib3.exceptions import SSLError
-# from urllib3.exceptions import SecurityWarning
+
 os.system('clear')
 
 def not_ready():
@@ -41,16 +34,20 @@ def print_one_by_one(text):
         sys.stdout.flush()
         time.sleep(0.01)
 
-def switch_sjca(url, sw_name):
+def switch_sjca(url_get_cfg, url_get_int, sw_name):
     payload = {}
     headers = {
-        'Authorization': 'Basic amh1MTpIVWppZUAyMDIyMDIyNw==',
+        'Authorization': 'Basic cmVzdGFwaV9yOjEyMzQ1Njc4OTBAQXNkZmdoamtsOw==',
         'Accept': 'application/json',
         'Content-Type': 'application/xml'
     }
 
-    response = requests.request("GET", url, verify=False, headers=headers, data=payload)
-    response_dict = response.json()
+    response_get_cfg = requests.request("GET", url_get_cfg, verify=False, headers=headers, data=payload)
+    response_get_cfg_dict = response_get_cfg.json()
+
+    response_get_int = requests.request("GET", url_get_int, verify=False, headers=headers, data=payload)
+    response_get_int_dict = response_get_int.json()
+
     #print(type(response))            #<class 'requests.models.Response'>
     #print(type(response_dict))       #<class 'dict'>
     # print(type(response.text))          #<class 'str'>
@@ -58,36 +55,27 @@ def switch_sjca(url, sw_name):
     # print(type(response.json))          #<class 'method'>
     # print(type(response.content))       #<class 'bytes'>
 
+
     while True:
         interface_choice = input("""\nPlease choose which interface you want to check: \n
-                      0:    ae0
-                      1:    ae1
-                      2:    ae2
-                      3:    ae3
-                      4:    ae4
-                      5:    ae5
-                      6:    ae6
-                      7:    ae7
-                      8:    ae8
-                      9:    ae9
-                      10:   ae10
-                      11:   ae11
-                      12:   ae12
-                      13:   ae13
-                      14:   ae14
-                      15:   ae15
-                      16:   ae16
-                      17:   ae17
-                      18:   ae18
-                      19:   ae19
-                      20:   ae20
-                      21:   ae21
-                      22:   ae22
-                      23:   ae23
-                      24:   ae24
-                      
-                      Q:    Quit\n       
-                  Your choice: """)
+          0:    ae0             15:   ae15
+          1:    ae1             16:   ae16
+          2:    ae2             17:   ae17
+          3:    ae3             18:   ae18
+          4:    ae4             19:   ae19
+          5:    ae5             20:   ae20
+          6:    ae6             21:   ae21
+          7:    ae7             22:   ae22
+          8:    ae8             23:   ae23
+          9:    ae9             24:   ae24
+          10:   ae10            34:   xe-0/0/34
+          11:   ae11            35:   xe-0/0/35
+          12:   ae12            36:   xe-0/0/36
+          13:   ae13            37:   xe-0/0/37
+          14:   ae14
+                    
+          Q:    Quit\n       
+                Your choice: """)
 
         if interface_choice == '0':
             interface_name = 'ae0'
@@ -139,6 +127,14 @@ def switch_sjca(url, sw_name):
             interface_name = 'ae23'
         elif interface_choice == '24':
             interface_name = 'ae24'
+        elif interface_choice == '34':
+            interface_name = 'xe-0/0/34'
+        elif interface_choice == '35':
+            interface_name = 'xe-0/0/35'
+        elif interface_choice == '36':
+            interface_name = 'xe-0/0/36'
+        elif interface_choice == '37':
+            interface_name = 'xe-0/0/37'
         elif interface_choice.lower() == 'q':
             os._exit(0)
         else:
@@ -146,50 +142,28 @@ def switch_sjca(url, sw_name):
             continue
 
 
-        # print(type(response.json()))
-        # print(type(response_dict))
-        # print(type(response.text))
+        int_ids_get_cfg = len(response_get_cfg_dict['configuration']['interfaces']['interface'])    #to figure out how many interfaces this switch has, data type is list
+        for int_id_get_cfg in range(int_ids_get_cfg):         # if_id is the index of the list
+            if (response_get_cfg_dict['configuration']['interfaces']['interface'])[int_id_get_cfg]['name'] == interface_name:    #retrieve interface_id(index of the lost) from interface_name
+                interface_id_get_cfg = int_id_get_cfg
 
-        # pprint.pprint(response_dict['configuration'])
-        # pprint.pprint(response_dict['configuration']['@'])
-        # pprint.pprint(response_dict['configuration']['chassis'])
-        # pprint.pprint(response_dict['configuration']['forwarding-options']['storm-control-profiles'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'])
-        # print(response.text)
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface']['family']['unit'][0]['family']['inet']['dhcp']['vendor-id'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][8]['unit'][0]['family']['inet']['dhcp']['vendor-id'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][125])  # interface ae0
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][125]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][126]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][127]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][128]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][129]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][130]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][131]['name'])
-        # pprint.pprint(response_dict['configuration']['interfaces']['interface'][132]['name'])
-        # pprint.pprint(response_dict)
-
-        print(len(response_dict['configuration']['interfaces']['interface']))
-        if_ids = len(response_dict['configuration']['interfaces']['interface'])
-        for if_id in range(if_ids):
-            if (response_dict['configuration']['interfaces']['interface'])[if_id]['name'] == interface_name:
-                interface_id = if_id
+        int_ids_get_int = len(response_get_int_dict['interface-information'][0]['physical-interface'])
+        for int_id_get_int in range(int_ids_get_int):
+            if (response_get_int_dict['interface-information'][0]['physical-interface'])[int_id_get_int]['name'][0]["data"] == interface_name:
+                interface_id_get_int = int_id_get_int
 
         os.system('clear')
+
         print("~" * 80)
-        if_dsc = response_dict['configuration']['interfaces']['interface'][interface_id]['description']
+        int_dsc = response_get_cfg_dict['configuration']['interfaces']['interface'][interface_id_get_cfg]['description']
+        int_mtu = response_get_int_dict['interface-information'][0]['physical-interface'][interface_id_get_int]['mtu'][0]['data']
         print_one_by_one(
-            f"Interface '{interface_name}' (description: '{if_dsc}') on \nswitch '{sw_name}' has the following VLAN members: \n")
+            f"Interface: '{interface_name}' \nDescription: '{int_dsc}' \nMTU: '{int_mtu}'\nOn switch '{sw_name}' has the following VLAN members: \n")
         print_one_by_one("~" * 80 )
         print()
-        pprint.pprint(response_dict['configuration']['interfaces']['interface'][interface_id]['unit'][0]['family'][
+        pprint.pprint(response_get_cfg_dict['configuration']['interfaces']['interface'][interface_id_get_cfg]['unit'][0]['family'][
                           'ethernet-switching']['vlan']['members'])
         print("~" * 80)
-
-        # (response_dict['configuration']['interfaces']['interface'][interface_id]['name'])
-
-        # os._exit(0)
-        # break
 
 
 def sjca():
@@ -205,27 +179,19 @@ def sjca():
               8:  leaf-access08.corp.sjca\n       
           Your choice: """)
         if sw_choice == '1' :
-          url = "https://172.19.195.39:3443/rpc/get-configuration"
+          url_get_cfg = "http://172.19.195.27:3000/rpc/get-configuration"
+          url_get_int = "http://172.19.195.27:3000/rpc/get-interface-information"
           sw_name = 'leaf-access01.corp.sjca'
-          switch_sjca(url, sw_name)
+          switch_sjca(url_get_cfg, url_get_int, sw_name)
 
         elif sw_choice == '2' :
-          url = "https://172.19.195.39:3443/rpc/get-configuration"
+          url_get_cfg = "http://172.19.195.28:3000/rpc/get-configuration"
+          url_get_int = "http://172.19.195.28:3000/rpc/get-interface-information"
           sw_name = 'leaf-access02.corp.sjca'
-          switch_sjca(url, sw_name)
+          switch_sjca(url_get_cfg, url_get_int, sw_name)
 
-        elif sw_choice == '3' or sw_choice == '4' or sw_choice == '5' or sw_choice == '6' or sw_choice == '7' or sw_choice == '8' :
+        elif sw_choice == '3' or sw_choice == '4' or sw_choice == '5' or sw_choice == '6' or sw_choice == '7' or sw_choice == '8':
             not_ready()
 
         else:
           invalid_choice()
-
-
-
-
-
-
-
-
-
-
