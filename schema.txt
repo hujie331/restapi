@@ -1,5 +1,0 @@
-get-software-information
-get-chassis-inventory
-get-configuration
-get-arp-table-information
-get-interface-information
