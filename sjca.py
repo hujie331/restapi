@@ -78,11 +78,11 @@ def switch_sjca_sw1_2(url_get_cfg, url_get_int, sw_name):
           7:    ae7             22:   ae22
           8:    ae8             23:   ae23
           9:    ae9             24:   ae24
-          10:   ae10            34:   xe-0/0/34
-          11:   ae11            35:   xe-0/0/35
-          12:   ae12            36:   xe-0/0/36
-          13:   ae13            37:   xe-0/0/37
-          14:   ae14
+          10:   ae10            25:   ae25
+          11:   ae11            34:   xe-0/0/34
+          12:   ae12            35:   xe-0/0/35
+          13:   ae13            36:   xe-0/0/36
+          14:   ae14            37:   xe-0/0/37
                     
           Q:    Quit\n       
                 Your choice: """)
@@ -137,6 +137,8 @@ def switch_sjca_sw1_2(url_get_cfg, url_get_int, sw_name):
             interface_name = 'ae23'
         elif interface_choice == '24':
             interface_name = 'ae24'
+        elif interface_choice == '25':
+            interface_name = 'ae25'
         elif interface_choice == '34':
             interface_name = 'xe-0/0/34'
         elif interface_choice == '35':
