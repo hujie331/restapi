@@ -12,5 +12,7 @@
     <orderEntry type="module" module-name="pyez" />
     <orderEntry type="module" module-name="restapi_f5_private" />
     <orderEntry type="module" module-name="data_conversion" />
+    <orderEntry type="module" module-name="rest-netbox" />
+    <orderEntry type="module" module-name="rest-infoblox" />
   </component>
 </module>
